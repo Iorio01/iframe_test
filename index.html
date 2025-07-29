@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Help Center</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .video-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      padding: 10px;
+    }
+
+    .video-item {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .video-item:hover {
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📚 Help Video Center</h2>
+
+  <div class="video-list">
+    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID1')">🛠️ How to Onboard</div>
+    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID2')">🔐 Using Okta</div>
+    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID3')">💳 Billing Setup</div>
+    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID4')">📨 Email Automation</div>
+    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID5')">📊 Using the Dashboard</div>
+  </div>
+
+  <script>
+    function openVideo(url) {
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
