@@ -1,60 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Help Center</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eAdvisorPro University – Branded Widget</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f4f4f4;
+    /* ===== Brand Colors from main site ===== */
+    :root {
+      --blue-dark: #07142d;
+      --blue-primary: #1549B2;
+      --blue-mid: #2e4b84;
+      --blue-accent: #377dff;
+      --blue-slate: #223645;
+      --grey-text: #444444;
+      --blue-light: #6cb5ff;
+      --brand-navy: #07142d;
+      --brand-blue: #377dff;
+      --brand-gray: #f4f6fa;
+
+      /* Widget usage */
+      --eap-primary: var(--brand-blue);
+      --eap-primary-dark: var(--blue-primary);
+      --eap-accent: var(--blue-light);
+      --eap-bg: #ffffff;
+      --eap-soft: var(--brand-gray);
+      --eap-border: #d0d7e2;
+      --eap-text: var(--blue-dark);
+      --eap-text-600: var(--grey-text);
+      --eap-radius: 12px;
+      --eap-shadow: 0 6px 20px rgba(7,20,45,.08);
     }
 
-    h2 {
-      text-align: center;
-    }
+    .eapUni, .eapUni * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+    .eapUni { width:100%; color:var(--eap-text); background:transparent; }
 
-    .video-list {
-      max-height: 400px;
-      overflow-y: auto;
-      margin-top: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-      padding: 10px;
-    }
+    /* header */
+    .eap-header { display:flex; align-items:center; gap:10px; padding:10px; background:var(--brand-navy); color:white; border-radius:var(--eap-radius) var(--eap-radius) 0 0; }
+    .eap-badge { width:24px; height:24px; border-radius:6px; background:linear-gradient(135deg,var(--brand-blue),var(--blue-mid)); }
+    .eap-title { margin:0; font-size:16px; font-weight:700; }
 
-    .video-item {
-      padding: 12px;
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+    /* card */
+    .eap-card { background:var(--eap-bg); border:1px solid var(--eap-border); border-radius:0 0 var(--eap-radius) var(--eap-radius); box-shadow:var(--eap-shadow); padding:10px; }
 
-    .video-item:hover {
-      background: #f0f0f0;
-    }
+    /* search */
+    .eap-search { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+    .eap-search input { flex:1; border:1px solid var(--eap-border); border-radius:9999px; padding:8px 12px; font-size:14px; color:var(--eap-text); }
+    .eap-search input:focus { outline:none; border-color:var(--eap-primary); box-shadow:0 0 0 2px var(--eap-accent); }
+
+    /* sections */
+    .eap-sections { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+    .eap-tag { border:1px solid var(--eap-border); background:var(--brand-gray); color:var(--eap-text-600); border-radius:9999px; padding:6px 12px; font-size:12px; cursor:pointer; transition:all .2s ease; }
+    .eap-tag:hover { background:var(--eap-accent); color:white; border-color:var(--eap-accent); }
+    .eap-tag.active { background:var(--eap-primary); color:white; border-color:var(--eap-primary-dark); }
+
+    /* list */
+    .eap-list { display:grid; gap:8px; max-height:480px; overflow:auto; }
+    .eap-item { display:flex; align-items:center; gap:10px; background:var(--brand-gray); border-radius:10px; padding:10px; cursor:pointer; transition:background .2s; }
+    .eap-item:hover { background:var(--blue-light); color:white; }
+    .eap-emoji { font-size:18px; width:22px; text-align:center; }
+    .eap-item-title { font-weight:600; font-size:14px; }
+    .eap-item-meta { font-size:12px; color:var(--eap-text-600); }
+
+    /* modal */
+    dialog.eap-modal { width:min(880px,96vw); border:0; border-radius:14px; padding:0; box-shadow:0 24px 70px rgba(7,20,45,.6); }
+    .eap-modal-head { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:var(--brand-navy); color:white; }
+    .eap-modal-title { font-weight:700; }
+    .eap-modal-close { background:transparent; border:0; font-size:22px; cursor:pointer; color:white; }
+    .eap-frame-wrap { background:#000; aspect-ratio:16/9; }
+    .eap-frame { width:100%; height:100%; border:0; }
   </style>
 </head>
 <body>
+  <div class="eapUni">
+    <div class="eap-header">
+      <div class="eap-badge"></div>
+      <h2 class="eap-title">eAdvisorPro University</h2>
+    </div>
 
-  <h2>📚 eAdvisorPro University</h2>
+    <div class="eap-card">
+      <div class="eap-search">
+        <span>🔎</span>
+        <input id="eap-search" type="search" placeholder="Search training videos" autocomplete="off" />
+      </div>
 
-  <div class="video-list">
-    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID1')">🛠️ How to Onboard</div>
-    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID2')">🔐 Using Okta</div>
-    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID3')">💳 Billing Setup</div>
-    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID4')">📨 Email Automation</div>
-    <div class="video-item" onclick="openVideo('https://www.youtube.com/watch?v=VIDEO_ID5')">📊 Using the Dashboard</div>
+      <div class="eap-sections" id="eap-sections"></div>
+      <div class="eap-list" id="eap-list"></div>
+      <div id="eap-empty" style="display:none; text-align:center; color:var(--eap-text-600); padding:10px;">No videos found.</div>
+    </div>
+
+    <dialog class="eap-modal" id="eap-modal">
+      <div class="eap-modal-head">
+        <div class="eap-modal-title" id="eap-modal-title">Playing…</div>
+        <button class="eap-modal-close" onclick="EAP.close()">✕</button>
+      </div>
+      <div class="eap-frame-wrap">
+        <iframe class="eap-frame" id="eap-frame" src="" allowfullscreen></iframe>
+      </div>
+    </dialog>
   </div>
 
   <script>
-    function openVideo(url) {
-      window.open(url, "_blank");
-    }
-  </script>
+    const EAP = (function(){
+      const data = [
+        { id:'onb-1', icon:'🧭', title:'How to Onboard (Start Here)', section:'Onboarding', meta:'6:42', url:'https://www.youtube.com/embed/VIDEO_ID1' },
+        { id:'okta-1', icon:'🔐', title:'Using Okta: SSO to Carriers', section:'Okta / SSO', meta:'8:31', url:'https://www.youtube.com/embed/VIDEO_ID2' },
+        { id:'bill-1', icon:'💳', title:'Billing Setup & Subscription FAQs', section:'Billing', meta:'5:12', url:'https://www.youtube.com/embed/VIDEO_ID3' },
+        { id:'mail-1', icon:'📨', title:'Email Automation with GHL', section:'Automation', meta:'7:04', url:'https://www.youtube.com/embed/VIDEO_ID4' },
+        { id:'dash-1', icon:'📊', title:'Using the Dashboard', section:'Dashboard', meta:'9:20', url:'https://www.youtube.com/embed/VIDEO_ID5' }
+      ];
 
+      const sections = ['All','Onboarding','Okta / SSO','Billing','Automation','Dashboard'];
+      let activeSection = '';  // empty => show ALL
+      let query = '';
+
+      const els = {
+        sections: document.getElementById('eap-sections'),
+        list: document.getElementById('eap-list'),
+        empty: document.getElementById('eap-empty'),
+        search: document.getElementById('eap-search'),
+        modal: document.getElementById('eap-modal'),
+        frame: document.getElementById('eap-frame'),
+        title: document.getElementById('eap-modal-title')
+      };
+
+      function renderSections(){
+        els.sections.innerHTML='';
+        sections.forEach(s=>{
+          const b=document.createElement('button');
+          const isAll=(s==='All');
+          const isActive=(isAll && !activeSection)||(!isAll && s===activeSection);
+          b.className='eap-tag'+(isActive?' active':'');
+          b.textContent=s;
+          b.onclick=()=>{
+            if(isAll){activeSection='';} else {activeSection=(activeSection===s)?'':s;}
+            render();
+          };
+          els.sections.appendChild(b);
+        });
+      }
+
+      function renderList(items){
+        els.list.innerHTML='';
+        items.forEach(v=>{
+          const row=document.createElement('div');
+          row.className='eap-item';
+          row.innerHTML=`<div class="eap-emoji">${v.icon}</div><div><div class="eap-item-title">${v.title}</div><div class="eap-item-meta">${v.meta} • ${v.section}</div></div>`;
+          row.onclick=()=>open(v);
+          els.list.appendChild(row);
+        });
+      }
+
+      function searchFilter(list){
+        const q=query.trim().toLowerCase();
+        return q?list.filter(v=>(v.title+v.section).toLowerCase().includes(q)):list;
+      }
+
+      function render(){
+        renderSections();
+        const base=activeSection?data.filter(v=>v.section===activeSection):data;
+        const filtered=searchFilter(base);
+        els.empty.style.display=filtered.length?'none':'block';
+        renderList(filtered);
+      }
+
+      function open(v){
+        els.title.textContent=v.title;
+        els.frame.src=v.url+'?autoplay=1';
+        els.modal.showModal();
+      }
+      function close(){ els.frame.src=''; els.modal.close(); }
+
+      els.search.oninput=(e)=>{query=e.target.value;render();};
+      window.addEventListener('keydown',e=>{if(e.key==='/'&&document.activeElement!==els.search){e.preventDefault();els.search.focus();} if(e.key==='Escape'&&els.modal.open)close();});
+
+      render();
+      return {close};
+    })();
+  </script>
 </body>
 </html>
-
